@@ -32,7 +32,7 @@ def rand_graph() -> nx.Graph:
 
     return graph
 
-
+# Main
 def main():
     # Local Variables
     graph = rand_graph()
@@ -45,15 +45,18 @@ def main():
 
     # Main loop
     while True:
+        # Events
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
-        pressed_keys = pygame.key.get_pressed()            
-        if pressed_keys[K_SPACE]:
-            graph = rand_graph()
+            if event.type == KEYDOWN:
+                pressed_keys = pygame.key.get_pressed()            
+                if pressed_keys[K_SPACE]:
+                    graph = rand_graph()
         
+        # Render
         displaysurface.fill((51,51,51))
         
         for edge in graph.edges:
