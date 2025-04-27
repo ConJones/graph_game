@@ -8,6 +8,8 @@ import random
 # Global Constants
 WIDTH = 1920
 HEIGHT = 1080
+NODE_RADIUS = 20
+SCREEN_EDGE_BUFFER = NODE_RADIUS + 10
 FPS = 144
 
 NUM_NODES = 10
@@ -19,7 +21,8 @@ NODE_COLORS = ((119, 185, 224),(99, 101, 207),(186, 125, 219),(255, 115, 157),(2
 
 # Functions
 def rand_position():
-    return (random.randint(0, WIDTH), random.randint(0, HEIGHT))
+    return ( random.randint(SCREEN_EDGE_BUFFER, WIDTH - SCREEN_EDGE_BUFFER), 
+            random.randint(SCREEN_EDGE_BUFFER, HEIGHT - SCREEN_EDGE_BUFFER) )
 
 def rand_graph() -> nx.Graph:
     node_list = ( ( v, {'position': rand_position(), 'color': random.choice(NODE_COLORS) } ) for v in range(NUM_NODES) )
@@ -63,7 +66,7 @@ def main():
             draw.line(displaysurface, (255, 255, 255), graph.nodes[edge[0]]['position'], graph.nodes[edge[1]]['position'], 3 )
 
         for _, node_data in graph.nodes(data=True):
-            draw.circle( displaysurface, color=node_data['color'], center=node_data['position'], radius=20)
+            draw.circle( displaysurface, color=node_data['color'], center=node_data['position'], radius=NODE_RADIUS)
         
         pygame.display.update()
         FramePerSec.tick(FPS)
