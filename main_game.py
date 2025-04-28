@@ -54,10 +54,8 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-            if event.type == KEYDOWN:
-                pressed_keys = pygame.key.get_pressed()            
-                if pressed_keys[K_SPACE]:
-                    graph = rand_graph()
+            if event.type == KEYDOWN and event.key == K_SPACE:
+                graph = rand_graph()
         
         # Render
         displaysurface.fill((51,51,51))
